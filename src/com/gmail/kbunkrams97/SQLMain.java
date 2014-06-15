@@ -31,6 +31,8 @@ public class SQLMain extends JavaPlugin
 	
 	public BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
 	
+	private volatile int counter = getConfig().getInt("Current-Timer-Progress");
+	
 	public void onEnable()
 	{
 		instance = this;
@@ -58,7 +60,8 @@ public class SQLMain extends JavaPlugin
 	
 	public void onDisable()
 	{
-		
+		getConfig().set("Current-Timer-Progress", counter);
+		saveConfig();
 	}
 	
 	public void updatePlayerLocation(Player player)
@@ -218,9 +221,14 @@ public class SQLMain extends JavaPlugin
 			@Override
 			public void run() 
 			{
-				purgeDatabase();
+				counter++;
+				if(counter/getConfig().getInt("Remove-Old-Data-Ever") >= 1)
+				{
+					purgeDatabase();
+					counter = 0;
+				}
 			}
-		}, 0L, getConfig().getInt("Remove-Old-Data-Every")*20*60);
+		}, 0L, 1200;
 	}
 	
 	public static SQLMain getInstance()
