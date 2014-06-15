@@ -1,0 +1,10 @@
+Update-Locations-Every: 3
+Remove-Old-Data-Every: 60
+Remove-Data-Older-Than: 3d5h3m
+MySQL:
+    Enabled: false
+    Address: 'localhost'
+    Port: 3306
+    Database: 'Minecraft'
+    Username: 'admin'
+    Password: 'password'
