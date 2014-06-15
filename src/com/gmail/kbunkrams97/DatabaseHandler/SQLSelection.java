@@ -34,6 +34,7 @@ public class SQLSelection {
             } catch (SQLException | ClassNotFoundException e) {
                 plugin.log.info(prefix + "MySQL connection failed. Switching to SQLite.");
                 plugin.getConfig().set("MySQL.Enabled", false);
+                plugin.saveConfig();
                 plugin.firstLoad = true;
                 con = getConnection();
             }
