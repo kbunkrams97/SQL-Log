@@ -1,0 +1,6 @@
+name: SQL-Log
+version: 1.0.0
+main: com.gmail.kbunkrams97.SQLMain
+commands:
+   sqllog:
+       description: Base command for SQL-Log.
